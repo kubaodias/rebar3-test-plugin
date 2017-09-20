@@ -28,9 +28,9 @@ do(State) ->
     Apps = rebar_state:project_apps(State),
     Deps = rebar_state:all_deps(State),
     lists:foldl(fun(AppInfo, {ok, StateAcc}) ->
-            rebar_api:info("Switch to ~p (~p)~n", [rebar_app_info:name(AppInfo), rebar_app_info:dir(AppInfo)]),
+            rebar_api:info("Switch to ~p (~p)~n", [rebar_app_info:name(AppInfo), rebar_app_info:out_dir(AppInfo)]),
             State1 = rebar_state:project_apps(StateAcc, [AppInfo]),
-            State2 = rebar_state:dir(State1, rebar_app_info:dir(AppInfo)),
+            State2 = rebar_state:dir(State1, rebar_app_info:out_dir(AppInfo)),
             rebar_prv_eunit:do(State2)
         end, {ok, State}, Apps ++ Deps).
 
