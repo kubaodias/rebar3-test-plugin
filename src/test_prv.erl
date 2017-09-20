@@ -26,10 +26,11 @@ init(State) ->
 -spec do(rebar_state:t()) -> {ok, rebar_state:t()} | {error, string()}.
 do(State) ->
     Apps = rebar_state:project_apps(State),
-    Deps = rebar_state:deps_names(State),
+    Deps = rebar_state:all_deps(State),
     AppNames = [element(2, AppInfo) || AppInfo <- Apps],
+    DepNames = [element(2, AppInfo) || AppInfo <- Deps],
     rebar_api:info("~p APPS (~p): ~p~n", [length(Apps), AppNames, Apps]),
-    rebar_api:info("~p DEPS: ~p~n", [length(Deps), Deps]),
+    rebar_api:info("~p DEPS (~p): ~p~n", [length(Deps), DepNames, Deps]),
     {ok, State}.
 
 -spec format_error(any()) ->  iolist().
