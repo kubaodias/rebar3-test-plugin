@@ -27,8 +27,10 @@ init(State) ->
 do(State) ->
     Apps = rebar_state:project_apps(State),
     Deps = rebar_state:all_deps(State),
-    rebar_api:info("~p APPS: ~p~n", [length(Apps), Apps]),
-    rebar_api:info("~p DEPS: ~p~n", [length(Deps), Deps]),
+    AppNames = [element(2, AppInfo) || AppInfo <- Apps],
+    DepNames = [element(2, AppInfo) || AppInfo <- Deps],
+    rebar_api:info("~p APPS: ~p~n", [length(Apps), Apps, AppNames]),
+    rebar_api:info("~p DEPS: ~p~n", [length(Deps), Deps, DepNames]),
     {ok, State}.
 
 -spec format_error(any()) ->  iolist().
