@@ -34,6 +34,7 @@ do(State) ->
     lists:foldl(fun(AppInfo, {ok, StateAcc}) ->
             rebar_api:info("Switch to ~p~n", [rebar_app_info:name(AppInfo)]),
             CurrentState = rebar_state:current_app(StateAcc, AppInfo),
+            rebar_api:info("APPstate: ~p~n", [CurrentState]),
             rebar_prv_eunit:do(CurrentState)
         end, {ok, State}, Apps ++ Deps).
 
