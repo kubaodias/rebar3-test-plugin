@@ -29,8 +29,8 @@ do(State) ->
     Deps = rebar_state:all_deps(State),
     AppNames = [element(2, AppInfo) || AppInfo <- Apps],
     DepNames = [element(2, AppInfo) || AppInfo <- Deps],
-    rebar_api:info("~p APPS: ~p~n", [length(Apps), Apps, AppNames]),
-    rebar_api:info("~p DEPS: ~p~n", [length(Deps), Deps, DepNames]),
+    rebar_api:info("~p APPS (~p): ~p~n", [length(Apps), AppNames, Apps]),
+    rebar_api:info("~p DEPS (~p): ~p~n", [length(Deps), DepNames, Deps]),
     {ok, State}.
 
 -spec format_error(any()) ->  iolist().
