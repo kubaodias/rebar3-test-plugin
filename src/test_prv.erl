@@ -17,6 +17,7 @@ init(State) ->
             {deps, ?DEPS},                % The list of dependencies
             {example, "rebar3 test"}, % How to use the plugin
             {opts, []},                   % list of options understood by the plugin
+            {profiles, [test]},
             {short_desc, "Test project applications"},
             {desc, "Test project applications"}
     ]),
