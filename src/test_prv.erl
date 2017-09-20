@@ -31,12 +31,11 @@ do(State) ->
     DepNames = [element(2, AppInfo) || AppInfo <- Deps],
     % rebar_api:info("~p APPS (~p): ~p~n", [length(Apps), AppNames, Apps]),
     % rebar_api:info("~p DEPS (~p): ~p~n", [length(Deps), DepNames, Deps]),
-    ok = lists:foreach(fun(AppInfo) ->
+    lists:foldl(fun(AppInfo, {ok, StateAcc}) ->
             rebar_api:info("Switch to ~p~n", [rebar_app_info:name(AppInfo)]),
-            CurrentState = rebar_state:current_app(State, AppInfo),
-            {ok, _} = rebar_prv_eunit:do(CurrentState)
-        end, Apps ++ Deps),
-    {ok, State}.
+            CurrentState = rebar_state:current_app(StateAcc, AppInfo),
+            rebar_prv_eunit:do(CurrentState)
+        end, {ok, State}, Apps ++ Deps).
 
 -spec format_error(any()) ->  iolist().
 format_error(Reason) ->
