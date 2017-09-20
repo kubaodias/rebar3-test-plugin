@@ -35,6 +35,7 @@ do(State) ->
             rebar_api:info("Switch to ~p (~p)~n", [rebar_app_info:name(AppInfo), rebar_app_info:dir(AppInfo)]),
             State1 = rebar_state:current_app(StateAcc, AppInfo),
             State2 = rebar_state:dir(State1, rebar_app_info:dir(AppInfo)),
+            rebar_api:info("PR APPS ~p~n", [rebar_state:project_apps(State2)]),
             rebar_prv_eunit:do(State2)
         end, {ok, State}, Apps ++ Deps).
 
