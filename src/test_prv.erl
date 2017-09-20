@@ -3,7 +3,7 @@
 -export([init/1, do/1, format_error/1]).
 
 -define(PROVIDER, test).
--define(DEPS, [app_discovery]).
+-define(DEPS, [install_deps]).
 
 %% ===================================================================
 %% Public API
