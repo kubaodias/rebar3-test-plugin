@@ -25,6 +25,8 @@ init(State) ->
 
 -spec do(rebar_state:t()) -> {ok, rebar_state:t()} | {error, string()}.
 do(State) ->
+    rebar_api:info("APPS: ~p~n", [rebar_state:project_apps(State)]),
+    rebar_api:info("DEPS: ~p~n", [rebar_state:all_deps(State)]),
     {ok, State}.
 
 -spec format_error(any()) ->  iolist().
